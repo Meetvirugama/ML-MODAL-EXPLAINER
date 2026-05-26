@@ -1,0 +1,34 @@
+{
+  "name": "kaggle-explainer",
+  "version": "1.0.0",
+  "description": "3D Machine Learning Algorithm Explainer - Perfect for Kaggle Contests & Educational Videos",
+  "author": "Your Name",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "vite"
+  },
+  "keywords": [
+    "kaggle",
+    "machine-learning",
+    "visualization",
+    "three.js",
+    "educational",
+    "algorithms",
+    "decision-tree",
+    "random-forest",
+    "neural-network",
+    "logistic-regression"
+  ],
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "three": "^0.178.0"
+  },
+  "devDependencies": {
+    "vite": "^7.0.0"
+  }
+}

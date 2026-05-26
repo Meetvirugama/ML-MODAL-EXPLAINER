@@ -1,0 +1,31 @@
+/* Logistic Regression Scene Styles */
+
+.logistic-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.class-1-label {
+  position: absolute;
+  color: #00ffff;
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.class-2-label {
+  position: absolute;
+  color: #00ff88;
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.boundary-line {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, #4cc9ff, transparent);
+  pointer-events: none;
+}

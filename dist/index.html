@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kaggle Contest Explainer - Machine Learning 3D Visualization</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="An interactive 3D machine learning algorithm explainer for Kaggle contests, neural networks, decision trees, random forests, and logistic regression.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/index-Bstl9ekB.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CfvvdEko.css">
+</head>
+
+<body>
+  <!-- WebGL Background Canvas -->
+  <canvas id="scene"></canvas>
+
+  <!-- Top Header Bar -->
+  <header class="app-header">
+    <h1 id="main-title">KAGGLE CONTEST EXPLAINER</h1>
+    <p class="subtitle">3D MACHINE LEARNING VISUALIZATION</p>
+  </header>
+
+  <!-- Progress Bar (Sleek line below header) -->
+  <div class="progress-bar-container">
+    <div id="scene-progress" class="progress-bar"></div>
+  </div>
+
+  <!-- Left Control Panel -->
+  <section class="control-panel glass-panel" id="controls">
+    <h2>CONTROLS</h2>
+    
+    <!-- Playback buttons -->
+    <div class="playback-controls">
+      <button id="btn-prev" class="btn-icon" title="Previous Scene">
+        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z" fill="currentColor"/></svg>
+      </button>
+      <button id="btn-play-pause" class="btn-icon btn-primary" title="Play/Pause">
+        <svg id="play-icon" viewBox="0 0 24 24" width="24" height="24" style="display:none;"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+        <svg id="pause-icon" viewBox="0 0 24 24" width="24" height="24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="currentColor"/></svg>
+      </button>
+      <button id="btn-next" class="btn-icon" title="Next Scene">
+        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" fill="currentColor"/></svg>
+      </button>
+    </div>
+
+    <!-- Scene Selector Dropdown -->
+    <div class="form-group">
+      <label for="select-scene">Jump to Scene</label>
+      <select id="select-scene" class="custom-select">
+        <!-- Will be populated dynamically by JS -->
+      </select>
+    </div>
+
+    <!-- Interactive sliders -->
+    <div class="settings-group">
+      <h3>Visual Parameters</h3>
+      
+      <div class="form-group">
+        <div class="label-val">
+          <label for="slider-particle-speed">Particle Speed</label>
+          <span id="val-particle-speed">1.0x</span>
+        </div>
+        <input type="range" id="slider-particle-speed" min="0" max="3" step="0.1" value="1.0" class="custom-slider">
+      </div>
+
+      <div class="form-group">
+        <div class="label-val">
+          <label for="slider-camera-speed">Orbit Speed</label>
+          <span id="val-camera-speed">1.0x</span>
+        </div>
+        <input type="range" id="slider-camera-speed" min="0" max="3" step="0.1" value="1.0" class="custom-slider">
+      </div>
+
+      <div class="form-group checkbox-group">
+        <input type="checkbox" id="check-orbit" checked>
+        <label for="check-orbit">Auto Camera Orbit</label>
+      </div>
+
+      <div class="form-group checkbox-group">
+        <input type="checkbox" id="check-network" checked>
+        <label for="check-network">Neural Net Background</label>
+      </div>
+    </div>
+
+    <!-- Red glowing Recording panel -->
+    <div class="record-container" style="display: flex; flex-direction: column; gap: 10px;">
+      <button id="btn-record" class="btn-record">
+        <span class="record-dot"></span>
+        <span id="record-text">RECORD MANUAL VIDEO</span>
+      </button>
+      <button id="btn-auto-record" class="btn-auto-record">
+        <span class="record-dot" style="background: var(--accent-color);"></span>
+        <span id="auto-record-text">START AUTOMATIC VIDEO</span>
+      </button>
+      <p class="record-hint">Automated run records all 8 scenes then downloads</p>
+    </div>
+  </section>
+
+  <!-- Right Explainer Panel -->
+  <article class="explainer-panel glass-panel" id="explainer">
+    <div id="scene-counter" class="scene-counter">01 / 08</div>
+    <h2 id="scene-title">Introduction</h2>
+    <div class="divider"></div>
+    <p id="scene-desc" class="description">
+      Loading description...
+    </p>
+    <div class="interactive-hint">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+      </svg>
+      Drag to rotate canvas view manually
+    </div>
+  </article>
+
+  <!-- Subtitle Caption Overlay -->
+  <div id="subtitle-container" class="subtitle-container">
+    <p id="subtitle-text">Initializing...</p>
+  </div>
+
+  <!-- Toast Notification Overlay -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Stuck Loading Screen (Will be hidden programmatically after click) -->
+  <div id="loading" class="loading">
+    <div class="spinner" id="loading-spinner"></div>
+    <h2 id="loading-title" style="font-family: 'Orbitron', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 4px; color: #fff; margin-bottom: 10px; text-align: center; text-shadow: 0 0 15px rgba(76, 201, 255, 0.6);">KAGGLE EXPLAINER</h2>
+    <p id="loading-status">Initializing Explainer Engine...</p>
+    <button id="btn-start" class="btn-start" style="display: none;">START 3D TOUR</button>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+/* Introduction Scene Styles */
+
+.intro-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+}
+
+.intro-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: #4cc9ff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 0 0 20px rgba(76, 201, 255, 0.6);
+  margin-bottom: 20px;
+  animation: fadeInDown 1s ease-out;
+}
+
+.intro-subtitle {
+  font-size: 24px;
+  color: #00ff88;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+  animation: fadeInUp 1s ease-out;
+  margin-bottom: 40px;
+}
+
+.intro-description {
+  font-size: 16px;
+  color: #99ccff;
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.6;
+  animation: fadeIn 2s ease-out;
+  letter-spacing: 1px;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

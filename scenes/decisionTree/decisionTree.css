@@ -1,0 +1,20 @@
+/* Decision Tree Scene Styles */
+
+.decision-tree-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.decision-tree-label {
+  position: absolute;
+  color: #00ff88;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  pointer-events: none;
+}
